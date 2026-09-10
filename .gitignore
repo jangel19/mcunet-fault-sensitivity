@@ -1,0 +1,4 @@
+venv311/
+*.onnx
+*.onnx.data
+*.pth
