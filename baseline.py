@@ -9,13 +9,11 @@ model.eval()
 dataset = load_dataset("ILSVRC/imagenet-1k", split="validation", streaming=True)
 
 transform = transforms.Compose([
-    transforms.Resize((image_size, image_size)),
+    transforms.Resize(int(image_size * 256 / 224)),
+    transforms.CenterCrop(image_size),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
 ])
-
-correct = 0
-total = 1000
 
 correct = 0
 total = 1000
@@ -36,8 +34,14 @@ for i, sample in enumerate(dataset):
     if pred == label:
         correct += 1
     
-    if i % 100 == 0:
+    if i % 50 == 0:
         print(f"Progress: {i}/{total} | Running accuracy: {correct/(i+1)*100:.2f}%")
+labels_seen = set()
+for i, sample in enumerate(dataset):
+    if i >= 1000:
+        break
+    labels_seen.add(sample['label'])
+print(f"unique classes seen: {len(labels_seen)}")
 
 print(f"\nModel: {description}")
 print(f"Final accuracy on {total} samples: {correct/total*100:.2f}%")
