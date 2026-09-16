@@ -22,6 +22,18 @@ def describe_tensor(subgraph, tensor_index):
         zero_point = quant.ZeroPoint(0)
  
     return {"shape": shape, "scale": scale, "zero_point": zero_point}
+def getStride(op, op_type):
+    if op_type == "CONV_2D":
+        options = tflite.Conv2DOptions()
+        options.Init(op.BuiltinOptions().Bytes, op.BuiltinOptions().Pos)
+        return options.StrideH(), options.StrideW()
+
+    if op_type == "DEPTHWISE_CONV_2D":
+        options = tflite.DepthwiseConv2DOptions()
+        options.Init(op.BuiltinOptions().Bytes, op.BuiltinOptions().Pos)
+        return options.StrideH(), options.StrideW()
+
+    return None, None
 
 
 def param_count_andMACs(op_type, weight_shape, output_shape):
@@ -62,10 +74,14 @@ def build_inventory(model_path):
         opcode_index = op.OpcodeIndex()
         opcode = model.OperatorCodes(opcode_index)
         op_type = tflite.opcode2name(opcode.BuiltinCode())
+
+        stride_h, stride_w = getStride(op, op_type)
  
         row = {
             "op_index": i,
             "op_type": op_type,
+            "stride_h": stride_h,
+            "stride_w": stride_w,
             "input_shape": None,
             "weight_shape": None,
             "output_shape": None,
