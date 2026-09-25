@@ -2,10 +2,14 @@
 
 Research project studying layer-wise fault sensitivity of INT8 quantized MCUNet models on embedded hardware. Built on the MCUNet / TinyEngine platform from MIT HAN Lab.
 
-**Baseline results (mcunet-in3, 320KB SRAM / 1MB Flash, 1000 ImageNet validation samples):**
-- Float32 (PyTorch): 64.00% top-1 accuracy
-- INT8 (TFLite, official MIT HAN Lab export): 63.50% top-1 accuracy
-- Quantization-induced accuracy drop: 0.50 pp (paper reports 0.4 pp for this model)
+**Baseline results (mcunet-in3, 320KB SRAM / 1MB Flash):**
+
+| Samples | Float32 (PyTorch) | INT8 (TFLite, official MIT HAN Lab export) | Quantization drop |
+|---|---|---|---|
+| 1,000 | 64.00% top-1 | 63.50% top-1 | 0.50 pp |
+| 50,000 (full ImageNet val) | 62.14% top-1 | 61.82% top-1 | 0.32 pp |
+
+Paper reference (mcunet-in3, official): 62.2% fp32 / 61.8% int8, a 0.4 pp drop. The full 50,000-sample run matches the paper's reported numbers within 0.06 pp (fp32) and 0.02 pp (int8); the 1,000-sample subset is noisier, as expected from the smaller sample size.
 
 See [`quantization_notes.md`](./quantization_notes.md) and [`baseline_report.md`](./baseline_report.md) for full details.
 
