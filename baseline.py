@@ -16,7 +16,7 @@ transform = transforms.Compose([
 ])
 
 correct = 0
-total = 1000
+total = 50000
 
 for i, sample in enumerate(dataset):
     if i >= total:
@@ -38,7 +38,7 @@ for i, sample in enumerate(dataset):
         print(f"Progress: {i}/{total} | Running accuracy: {correct/(i+1)*100:.2f}%")
 labels_seen = set()
 for i, sample in enumerate(dataset):
-    if i >= 1000:
+    if i >= 50000:
         break
     labels_seen.add(sample['label'])
 print(f"unique classes seen: {len(labels_seen)}")

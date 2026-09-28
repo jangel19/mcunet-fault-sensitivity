@@ -20,10 +20,10 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-print("running cal on 1000 samples (same as baseline)")
+print("running cal on 50000 samples (same as baseline)")
 with torch.no_grad():
     for i, sample in enumerate(dataset):
-        if i >= 1000:
+        if i >= 50000:
             break
         img = sample['image']
         if img.mode != 'RGB':
@@ -40,7 +40,7 @@ print("converted to int8, running eval...")
 # eval on fresh stream
 dataset2 = load_dataset("ILSVRC/imagenet-1k", split="validation", streaming=True)
 correct = 0
-total = 1000
+total = 50000
 
 with torch.no_grad():
     for i, sample in enumerate(dataset2):

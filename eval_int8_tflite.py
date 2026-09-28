@@ -29,7 +29,7 @@ print(f"resolution: {resolution}")
 dataset = load_dataset("ILSVRC/imagenet-1k", split="validation", streaming=True)
 
 correct = 0
-total = 1000
+total = 50000
 
 for i, sample in enumerate(dataset):
     if i >= total:
@@ -61,10 +61,10 @@ for i, sample in enumerate(dataset):
     if pred == label:
         correct += 1
 
-    if i % 50 == 0:
+    if i % 100 == 0:
         print(f"progress: {i}/{total} | running accuracy: {correct/(i+1)*100:.2f}%")
 
 print(f"\nmodel: mcunet-in3 (320kb sram / 1mb flash)")
 print(f"quantization: int8 tflite (mit han lab official)")
 print(f"final int8 accuracy on {total} samples: {correct/total*100:.2f}%")
-print(f"baseline float32 accuracy: 64.00%")
+print(f"baseline float32 accuracy: 62.14%")
