@@ -1,0 +1,30 @@
+mode=corner layers=14 bits=8 images=200 seed=2026 -> ../results/first_pass_corner.csv
+  20 trials, 18.7 s
+  40 trials, 37.6 s
+  60 trials, 56.3 s
+  80 trials, 75.0 s
+  100 trials, 93.8 s
+  120 trials, 112.6 s
+  140 trials, 131.4 s
+  160 trials, 150.1 s
+  180 trials, 168.7 s
+  200 trials, 187.5 s
+  220 trials, 206.3 s
+  240 trials, 225.1 s
+  260 trials, 243.8 s
+  280 trials, 262.4 s
+  300 trials, 281.3 s
+  320 trials, 300.2 s
+  340 trials, 319.2 s
+  360 trials, 337.9 s
+  380 trials, 356.5 s
+  400 trials, 375.4 s
+  420 trials, 394.2 s
+  440 trials, 413.1 s
+  460 trials, 431.6 s
+  480 trials, 450.3 s
+  500 trials, 469.1 s
+  520 trials, 487.9 s
+  540 trials, 506.7 s
+  560 trials, 525.4 s
+done: 560 trials in 525.4 s, model buffer clean: yes
