@@ -10,7 +10,7 @@ goal: define exactly what a fault is, where it goes, and how i score it so the i
 - fault = single bit flip in an int8 tensor
 - weights first, activations second
 - bits 0-7 swept uniformly, lit used as a hypothesis not an assumption
-- random elements, seeded, fixed image subset
+- corner case elements first (random still available as a mode, seeded), fixed image subset. updated week 6, see the week 6 changes section at the bottom
 - outcomes: masked / subtle sdc / catastrophic sdc / due, scored against the clean run
 
 
@@ -120,7 +120,7 @@ once the pipeline is validated this widens to all 55
 
 ## step 7 - sampling
 
-- element: uniform random within the layer's weight tensor, seeded
+- element (week 6 update, from the advisor meeting): corner cases first, not uniform random. per layer: max |w|, smallest nonzero |w|, first zero weight, first element, last element, each with all 8 bits. random within the layer's weight tensor stays as `--mode random`. my reading of "corner cases" is the five rules above and the advisor still has to confirm it, so treat the rules as pending
 - one flip per trial
 - k trials per (layer, bit) cell
 - images: a fixed subset, same images every trial. not all 50k per trial
@@ -131,7 +131,7 @@ sample size math reference: leveugle et al., statistical fault injection: quanti
 
 first pass budget check: 14 layers x 8 bits x 30 trials = 3,360 trials. at 200 images per trial thats 672,000 inferences. need to time one inference before locking k and the subset size
 
-image subset: ~200 images, seeded, spread across classes (the first 1000 streamed samples only covered 638 classes so not just taking the first n). cached once as a .npy so nothing re-streams per trial. the 50k run stays the baseline accuracy number, separate from the injection runs
+image subset: ~200 images, spread across classes (the first 1000 streamed samples only covered 638 classes so not just taking the first n). built once by make_subset.py as the first image of each new class in stream order, so there is no randomness in it at all. saved as raw int8 .bin files plus labels.bin and a manifest with sha256s (not .npy anymore, the c code reads the raw bytes) so nothing re-streams per trial. the 200 images come from the first 226 streamed samples, and two runs of the script give byte identical files. the 50k run stays the baseline accuracy number, separate from the injection runs
 
 
 ## step 8 - outcome classes
@@ -148,7 +148,7 @@ per image, compared against the clean run on that same image:
 due should be ~0. int8 data flips dont crash anything, crashes come from corrupted metadata like indices / shapes / pointers and thats out of scope. worth reporting as a result anyway (breier et al. 2026 report int8 weights stay bounded so no nan or extreme values like the float formats)
 
 per trial metrics (over the subset):
-- mismatch rate = fraction of images where faulted top-1 != clean top-1
+- mismatch rate = (catastrophic + due) / n. a due has no top-1 at all so it counts as a mismatch. this is slightly different from "faulted top-1 != clean top-1" above, but due has been 0 so far so the numbers are the same
 - accuracy under fault vs labels, and drop vs clean accuracy on the same subset
 - counts of masked / subtle / catastrophic / due
 
@@ -159,8 +159,8 @@ open: does catastrophic mean any top-1 change, or only the clean class dropping 
 
 ## step 9 - reproducibility
 
-- seed per trial, logged. numpy default_rng, seed -> (element, bit)
-- image subset saved as .npy, sha256 recorded in the log
+- seed per trial, logged. week 6 update: splitmix64 instead of numpy default_rng since the injector is in c. the trial seed comes from (base seed, op index, bit, k) so a cell gets the same seed no matter what else ran, and in random mode the seed picks the element. same seed gives the same element and the same result, checked (two full runs gave byte identical csvs). in corner mode the element does not depend on the seed, it is still logged
+- image subset saved as raw int8 .bin files, sha256 of every image in subset/manifest.json (not written into the log yet)
 - model file sha256 recorded
 - requirements.txt pinned
 - before trusting anything: clean run twice gives identical logits, and flip + restore gives identical logits to the clean run
@@ -171,11 +171,28 @@ log row per trial:
 trial_id, seed, op_index, op_type, stage, tensor (weight/act),
 elem_idx, bit, orig_val, new_val, n_images,
 mismatch_rate, acc_faulted, acc_clean,
-n_masked, n_subtle, n_catastrophic, n_due
+n_masked, n_subtle, n_catastrophic, n_due, elem_rule
 ```
 
+elem_rule is the corner rule name (max_abs, min_nonzero_abs, first_zero, first_elem, last_elem) or "random". added week 6 so a row says why that element was picked
 
-## references
+
+## week 6 changes (what the c prototype actually does)
+
+these are the places the built injector differs from or adds to the spec above. everything in c/ and results/ backs these up
+
+- element selection is corner cases first (max |w|, smallest nonzero |w|, first zero weight, first, last, all 8 bits per rule), random kept as `--mode random`. corner rules are pending advisor confirmation. ties go to the lowest index and one element can win more than one rule, each rule still gets its own rows
+- new elem_rule column at the end of the log row
+- seeding is splitmix64, same seed gives the same result (verified)
+- mismatch_rate = (catastrophic + due) / n
+- stage column is derived from op index ranges (stem is op 1, stage 1 ops 2-6, stage 2 ops 7-33, stage 3 ops 34-53, stage 4 ops 54-93, stage 5 ops 94-119, tail op 120). a stage starts at the expand conv of its entry block, so it matches the 14 layer table in step 6 but it is my own derivation, not something read from the model
+- runtime is the tflite c api built from the v2.21.0 source (same version as the python tensorflow) with xnnpack and ruy off. so it is not the same kernel path as the python eval, which uses the default interpreter with xnnpack. measured on the 200 image subset: the c logits are within 1 unit of python's reference kernels (top-1 identical on all 200) but up to 8 units away from python's default and no-delegate kernels, with 9-10 of 200 top-1 flips. python's own three configurations differ from each other by about the same amount
+- because of that the c clean run is the reference for every trial (outcomes compare faulted c logits to clean c logits), and c subset accuracy will not equal 61.82%. on the 200 image subset c gets 130/200 = 65.0%, python default gets 131/200. the 61.82% is the 50k python number, re-checked after the refactor
+- fault model framing: this is a weight memory fault, a bit of the stored int8 weight flips and every inference after that uses the corrupted value. it is not emulated cpu compute corruption (no alu or register faults, nothing about how the kernel computes). activation faults come in week 11
+- the interpreter is created once and reused across trials. checked that it sees flips in all 55 layers by comparing it to a freshly built interpreter on the same faulted buffer (identical logits in all 110 cases tried)
+
+open: the advisor needs to confirm the corner rules
+
 
 - lin et al., mcunet: tiny deep learning on iot devices, neurips 2020
   https://arxiv.org/abs/2007.10319
