@@ -2,3 +2,13 @@ venv311/
 *.onnx
 *.onnx.data
 *.pth
+
+# fault-injection subset and C build artifacts
+subset/
+c/build/
+c/*.o
+c/test_fi
+c/run_trials
+c/trials*.csv
+*.dSYM/
+__pycache__/
