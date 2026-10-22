@@ -1,7 +1,9 @@
+import argparse
+from model_config import add_model_argument
 import os, csv, tflite
 
 
-model_path = os.path.expanduser("~/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite")
+
 
 
 def describe_tensor(subgraph, tensor_index):
@@ -142,9 +144,13 @@ def write_csv(rows, output_path):
 
 
 if __name__ == "__main__":
-    rows = build_inventory(model_path)
+    ap = argparse.ArgumentParser()
+    add_model_argument(ap)
+    ap.add_argument("--out", default="layer_inventory.csv")
+    args = ap.parse_args()
+    rows = build_inventory(args.model)
  
-    output_path = "layer_inventory.csv"
+    output_path = args.out
     write_csv(rows, output_path)
  
     print(f"Wrote {len(rows)} rows to {output_path}")

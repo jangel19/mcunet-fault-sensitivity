@@ -1,3 +1,5 @@
+import argparse
+from model_config import add_model_argument
 # need to get the input tensor shape, weight tensor shape, output tensor shape, and quantization params
 
 # the operator holds the tensor indices so we need to look up in the subgraphs for tensor list
@@ -6,9 +8,13 @@ import os, tflite
 import numpy as np
 
 
-model_path = os.path.expanduser("~/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite")
 
-with open(model_path, "rb") as f:
+
+ap = argparse.ArgumentParser()
+add_model_argument(ap)
+args = ap.parse_args()
+
+with open(args.model, "rb") as f:
     buf = f.read()
 
 model = tflite.Model.GetRootAsModel(buf, 0)

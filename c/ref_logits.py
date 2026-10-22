@@ -16,7 +16,7 @@ import numpy as np
 import tensorflow as tf
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-import eval_int8_tflite as ev  # noqa: E402  (only for the model path)
+from model_config import add_model_argument
 
 
 def logits_for(interpreter, images):
@@ -34,7 +34,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="subset")
     ap.add_argument("--k", type=int, default=200)
-    ap.add_argument("--model", default=ev.tflite_path)
+    add_model_argument(ap)
     args = ap.parse_args()
 
     images = []

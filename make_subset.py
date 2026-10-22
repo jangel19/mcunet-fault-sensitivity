@@ -21,6 +21,7 @@ import os
 import numpy as np
 import tensorflow as tf
 
+from model_config import add_model_argument
 import eval_int8_tflite as ev
 
 
@@ -33,8 +34,8 @@ def sha256_file(path):
         return sha256_bytes(f.read())
 
 
-def build_subset(n_images, scan_limit):
-    interpreter = tf.lite.Interpreter(ev.tflite_path)
+def build_subset(n_images, scan_limit, model_path):
+    interpreter = tf.lite.Interpreter(model_path)
     input_shape = interpreter.get_input_details()[0]["shape"]
     transform = ev.make_transform(int(input_shape[1]))
 
@@ -57,9 +58,10 @@ def main():
     ap.add_argument("--n", type=int, default=200, help="number of images (one per class)")
     ap.add_argument("--out", default="subset", help="output directory")
     ap.add_argument("--scan-limit", type=int, default=50000, help="max stream samples to scan")
+    add_model_argument(ap)
     args = ap.parse_args()
 
-    picked, input_shape = build_subset(args.n, args.scan_limit)
+    picked, input_shape = build_subset(args.n, args.scan_limit, args.model)
 
     os.makedirs(args.out, exist_ok=True)
     entries = []
@@ -81,7 +83,7 @@ def main():
         "dtype": "int8",
         "labels_dtype": "int32 little-endian",
         "rule": "first image of each new class in stream order",
-        "model_sha256": sha256_file(ev.tflite_path),
+        "model_sha256": sha256_file(args.model),
         "labels_sha256": sha256_bytes(labels.tobytes()),
         "images": entries,
     }

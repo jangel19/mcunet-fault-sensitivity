@@ -1,10 +1,16 @@
+import argparse
+from model_config import add_model_argument
 import tflite, os
 
-model_path = os.path.expanduser("~/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite")
+
 
 
 #load the raw bytes of the model
-with open(model_path, "rb") as f:
+ap = argparse.ArgumentParser()
+add_model_argument(ap)
+args = ap.parse_args()
+
+with open(args.model, "rb") as f:
     buf = f.read()
 
 

@@ -1,10 +1,10 @@
+import argparse
+from model_config import add_model_argument
 import numpy as np
 import tensorflow as tf
 from datasets import load_dataset
 from PIL import Image
 from torchvision import transforms
-# load the pre-built int8 tflite model from mit han lab
-tflite_path = "/Users/jordiangel/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite"
 
 
 def make_transform(resolution):
@@ -41,8 +41,11 @@ def preprocess_to_int8(img, transform, input_shape):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    add_model_argument(ap)
+    args = ap.parse_args()
     # set up the tflite interpreter (this is what runs the model)
-    interpreter = tf.lite.Interpreter(tflite_path)
+    interpreter = tf.lite.Interpreter(args.model)
     interpreter.allocate_tensors()
 
     # get input and output tensor info
