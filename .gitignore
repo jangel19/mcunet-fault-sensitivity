@@ -12,3 +12,25 @@ c/run_trials
 c/trials*.csv
 *.dSYM/
 __pycache__/
+
+# local python envs and bytecode
+venv/
+venv*/
+.venv/
+.venv*/
+env/
+.env/
+*.pyc
+*.pyo
+
+# model files and local arrays
+*.tflite
+*.npy
+
+# local data and download caches
+data/
+datasets/
+imagenet/
+.cache/
+.huggingface/
+hf_cache/
