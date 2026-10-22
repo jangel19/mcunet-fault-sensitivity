@@ -1,6 +1,10 @@
-# build the tests and trial runner
-# make test also writes fresh python reference outputs
-# tflite is an external install, see the build notes
+# Build the fault injection tests and the trial runner.
+#
+#   make            build test_fi and run_trials
+#   make test       write python reference logits, then run test_fi
+#   make smoke      short run_trials run (see SMOKE_LIMIT)
+#
+# the external library setup is in the build notes
 
 TFLITE ?= $(HOME)/.local/tflite-2.21.0
 MODEL  ?= $(if $(MCUNET_MODEL),$(MCUNET_MODEL),$(HOME)/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite)
