@@ -1,0 +1,30 @@
+mode=corner layers=14 bits=8 images=200 seed=2026 -> /private/tmp/mcunet-audit-20261021/rerun_corner.csv
+  20 trials, 18.8 s
+  40 trials, 37.4 s
+  60 trials, 56.0 s
+  80 trials, 74.7 s
+  100 trials, 93.8 s
+  120 trials, 112.8 s
+  140 trials, 131.7 s
+  160 trials, 150.7 s
+  180 trials, 169.6 s
+  200 trials, 188.6 s
+  220 trials, 207.8 s
+  240 trials, 227.1 s
+  260 trials, 246.0 s
+  280 trials, 265.0 s
+  300 trials, 283.9 s
+  320 trials, 302.9 s
+  340 trials, 321.8 s
+  360 trials, 340.8 s
+  380 trials, 360.3 s
+  400 trials, 379.4 s
+  420 trials, 398.0 s
+  440 trials, 417.2 s
+  460 trials, 436.2 s
+  480 trials, 455.1 s
+  500 trials, 474.2 s
+  520 trials, 493.4 s
+  540 trials, 512.4 s
+  560 trials, 531.1 s
+done: 560 trials in 531.1 s, model buffer clean: yes

@@ -1,0 +1,3 @@
+mode=corner layers=1 bits=8 images=1 seed=2026 -> /private/tmp/mcunet-audit-20261021/invalid_layer.csv
+op 999 is not an injectable layer, skipped
+done: 0 trials in 0.0 s, model buffer clean: yes

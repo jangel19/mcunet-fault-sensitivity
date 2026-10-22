@@ -1,0 +1,5 @@
+op,scale_count,quantized_dimension,scale_min,scale_max
+1 16 0 -0.020387113094329834 0.058766499161720276
+3 16 3 9.110379811660962e-11 0.13247528672218323
+120 1000 0 0.004877720959484577 0.004877720959484577
+weight elements 721032 bias elements 8688 weight zero points {0} weight quantized dimensions {0, 3}

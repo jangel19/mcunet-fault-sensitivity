@@ -1,0 +1,52 @@
+/Users/jordiangel/Desktop/research/ee research/mcunet-fault-sensitivity/venv311/lib/python3.11/site-packages/tensorflow/lite/python/interpreter.py:457: UserWarning:     Warning: tf.lite.Interpreter is deprecated and is scheduled for deletion in
+    TF 2.20. Please use the LiteRT interpreter from the ai_edge_litert package.
+    See the [migration guide](https://ai.google.dev/edge/litert/migration)
+    for details.
+    
+  warnings.warn(_INTERPRETER_DELETION_WARNING)
+independent python reference clean accuracy 0.65
+{"trial_id": 79, "op": 3, "masked": 0, "subtle": 1, "catastrophic": 199, "accuracy": 0.005}
+{"trial_id": 520, "op": 120, "masked": 195, "subtle": 5, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 521, "op": 120, "masked": 189, "subtle": 11, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 522, "op": 120, "masked": 174, "subtle": 26, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 523, "op": 120, "masked": 155, "subtle": 45, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 524, "op": 120, "masked": 103, "subtle": 97, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 525, "op": 120, "masked": 56, "subtle": 144, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 526, "op": 120, "masked": 28, "subtle": 172, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 527, "op": 120, "masked": 16, "subtle": 184, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 528, "op": 120, "masked": 193, "subtle": 7, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 529, "op": 120, "masked": 187, "subtle": 13, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 530, "op": 120, "masked": 168, "subtle": 32, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 531, "op": 120, "masked": 144, "subtle": 56, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 532, "op": 120, "masked": 103, "subtle": 97, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 533, "op": 120, "masked": 51, "subtle": 149, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 534, "op": 120, "masked": 22, "subtle": 178, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 535, "op": 120, "masked": 15, "subtle": 185, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 536, "op": 120, "masked": 196, "subtle": 4, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 537, "op": 120, "masked": 183, "subtle": 17, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 538, "op": 120, "masked": 161, "subtle": 39, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 539, "op": 120, "masked": 134, "subtle": 66, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 540, "op": 120, "masked": 73, "subtle": 127, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 541, "op": 120, "masked": 29, "subtle": 171, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 542, "op": 120, "masked": 18, "subtle": 182, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 543, "op": 120, "masked": 9, "subtle": 191, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 544, "op": 120, "masked": 195, "subtle": 5, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 545, "op": 120, "masked": 185, "subtle": 15, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 546, "op": 120, "masked": 179, "subtle": 21, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 547, "op": 120, "masked": 145, "subtle": 55, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 548, "op": 120, "masked": 104, "subtle": 96, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 549, "op": 120, "masked": 52, "subtle": 148, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 550, "op": 120, "masked": 31, "subtle": 169, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 551, "op": 120, "masked": 17, "subtle": 183, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 552, "op": 120, "masked": 194, "subtle": 6, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 553, "op": 120, "masked": 187, "subtle": 13, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 554, "op": 120, "masked": 162, "subtle": 38, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 555, "op": 120, "masked": 136, "subtle": 64, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 556, "op": 120, "masked": 90, "subtle": 110, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 557, "op": 120, "masked": 45, "subtle": 155, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 558, "op": 120, "masked": 22, "subtle": 178, "catastrophic": 0, "accuracy": 0.65}
+{"trial_id": 559, "op": 120, "masked": 10, "subtle": 190, "catastrophic": 0, "accuracy": 0.65}
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+fresh reference default matches saved True accuracy 0.655
+fresh reference nodeleg matches saved True accuracy 0.665
+fresh reference ref matches saved True accuracy 0.65

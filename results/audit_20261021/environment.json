@@ -1,0 +1,17 @@
+{
+  "source_commit": "6fd39f0",
+  "python": "3.11.9",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "versions": {
+    "tensorflow": "2.21.0",
+    "tflite": "2.18.0",
+    "numpy": "2.4.6",
+    "torch": "2.14.0",
+    "torchvision": "0.29.0",
+    "datasets": "5.0.1",
+    "pillow": "12.3.0"
+  },
+  "c_library_path": "/Users/jordiangel/.local/tflite-2.21.0/lib/libtensorflowlite_c.dylib",
+  "c_library_sha256": "2eb9b9b2b108a4af52e91deafc05590b3e9672e7b3775c894d761d2b615e0a16",
+  "c_library_reported_version": "2.19.0"
+}

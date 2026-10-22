@@ -1,0 +1,45 @@
+../venv311/bin/python ref_logits.py --subset ../subset --k 200 --model /Users/jordiangel/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite
+/private/tmp/mcunet-audit-20261021/venv311/lib/python3.11/site-packages/tensorflow/lite/python/interpreter.py:457: UserWarning:     Warning: tf.lite.Interpreter is deprecated and is scheduled for deletion in
+    TF 2.20. Please use the LiteRT interpreter from the ai_edge_litert package.
+    See the [migration guide](https://ai.google.dev/edge/litert/migration)
+    for details.
+    
+  warnings.warn(_INTERPRETER_DELETION_WARNING)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+wrote ../subset/ref_logits_default.bin: (200, 1000)
+wrote ../subset/ref_logits_nodeleg.bin: (200, 1000)
+wrote ../subset/ref_logits_ref.bin: (200, 1000)
+./test_fi --model /Users/jordiangel/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite --subset ../subset --csv ../layer_inventory.csv --images 200
+TfLiteVersion: 2.19.0
+model: 1018208 bytes, 55 conv layers located
+
+[splitmix64 reference vectors]
+
+[locator vs layer_inventory.csv]
+  locator: 55 layers, csv: 55 injectable, 55 matched (op index, type, shape, count)
+
+[intended int8 value change: all 256 values x 8 bits]
+  2048 (value, bit) pairs checked arithmetically and through the buffer
+
+[exactly one byte differs while faulted; restore returns clean]
+  1320 cases (55 layers x first/middle/last element x 8 bits)
+clean run: 200 images, 4.8 ms/image
+
+[zero faults / determinism / fault visible / restore / seed]
+  zero faults: 200/200 masked, accuracy 130/200
+  op 120 elem 22334 bit 7 (127 -> -1): masked=16 subtle=184 catastrophic=0 due=0 of 200
+  seed 17404210285331851499 -> op 62 elem 10354 twice: scores identical (masked=0 subtle=195 cat=5)
+
+[persistent interpreter sees flips in all 55 layers (vs fresh interpreter)]
+  110 faulted cases over 55 layers: persistent == fresh in 110, flip changed the logits in 105 (4 images each)
+
+[C runtime vs python tf.lite.Interpreter]
+  python default (XNNPACK)   vs python no delegates       : bit-exact   0/200, top-1 differs 10, max |diff| 7
+  python default (XNNPACK)   vs python reference kernels  : bit-exact   0/200, top-1 differs 10, max |diff| 8
+  python no delegates        vs python reference kernels  : bit-exact   0/200, top-1 differs 9, max |diff| 7
+  C runtime                  vs python default (XNNPACK)  : bit-exact   0/200, top-1 differs 10, max |diff| 8
+  C runtime                  vs python no delegates       : bit-exact   0/200, top-1 differs 9, max |diff| 7
+  C runtime                  vs python reference kernels  : bit-exact  70/200, top-1 differs 0, max |diff| 1
+  subset accuracy (200 images): C 130, python default 131, no delegates 133, reference 130
+
+==== 99 checks passed, 0 failed, 0 skipped ====

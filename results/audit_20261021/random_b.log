@@ -1,0 +1,2 @@
+mode=random layers=3 bits=2 images=20 seed=2026 -> /private/tmp/mcunet-audit-20261021/random_b.csv
+done: 18 trials in 1.7 s, model buffer clean: yes
