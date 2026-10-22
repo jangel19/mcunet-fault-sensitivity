@@ -1,0 +1,13 @@
+Collecting cmake==4.4.0
+  Downloading cmake-4.4.0-py3-none-macosx_10_10_universal2.whl.metadata (7.0 kB)
+Collecting ninja
+  Downloading ninja-1.13.2-py3-none-macosx_10_9_universal2.whl.metadata (5.4 kB)
+Downloading cmake-4.4.0-py3-none-macosx_10_10_universal2.whl (54.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.4/54.4 MB 9.5 MB/s eta 0:00:00
+Downloading ninja-1.13.2-py3-none-macosx_10_9_universal2.whl (306 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 306.6/306.6 kB 11.8 MB/s eta 0:00:00
+Installing collected packages: ninja, cmake
+Successfully installed cmake-4.4.0 ninja-1.13.2
+
+[notice] A new release of pip is available: 24.0 -> 26.2.2
+[notice] To update, run: /private/tmp/mcunet-tflite-build-tools/bin/python -m pip install --upgrade pip

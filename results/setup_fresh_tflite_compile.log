@@ -1,0 +1,2 @@
+cc -std=c11 -O2 -g -Wall -Wextra -I"/private/tmp/mcunet fresh tflite/include" -o test_fi test_fi.c fault_inject.c -L"/private/tmp/mcunet fresh tflite/lib" -ltensorflowlite_c -Wl,-rpath,"/private/tmp/mcunet fresh tflite/lib"
+cc -std=c11 -O2 -g -Wall -Wextra -I"/private/tmp/mcunet fresh tflite/include" -o run_trials run_trials.c fault_inject.c -L"/private/tmp/mcunet fresh tflite/lib" -ltensorflowlite_c -Wl,-rpath,"/private/tmp/mcunet fresh tflite/lib"

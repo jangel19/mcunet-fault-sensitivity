@@ -1,0 +1,4 @@
+./run_trials --model "/private/tmp/mcunet clone check/model file.tflite" --subset "/private/tmp/mcunet clone check/image subset" --mode corner --layers 1,62,120 --bits 0,7 --limit 30 --images 20 --out trials_smoke.csv
+mode=corner layers=3 bits=2 images=20 seed=2026 -> trials_smoke.csv
+  20 trials, 1.9 s
+done: 30 trials in 2.9 s, model buffer clean: yes

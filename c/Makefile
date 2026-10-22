@@ -1,6 +1,6 @@
 # build the tests and trial runner
 # make test also writes fresh python reference outputs
-# tflite is an external install, see build_tflite.md
+# tflite is an external install, see the build notes
 
 TFLITE ?= $(HOME)/.local/tflite-2.21.0
 MODEL  ?= $(if $(MCUNET_MODEL),$(MCUNET_MODEL),$(HOME)/.torch/mcunet/mcunet-320kb-1mb_imagenet.tflite)

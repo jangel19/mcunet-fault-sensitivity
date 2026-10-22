@@ -1,0 +1,781 @@
+-- The C compiler identification is AppleClang 17.0.0.17000604
+-- The CXX compiler identification is AppleClang 17.0.0.17000604
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(abseil-cpp) is deprecated, call
+  FetchContent_MakeAvailable(abseil-cpp) instead.  Policy CMP0169 can be set
+  to OLD to allow FetchContent_Populate(abseil-cpp) to be called directly for
+  now, but the ability to call it with declared details will be removed
+  completely in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/abseil-cpp.cmake:35 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findabsl.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:181 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX17
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX17 - Success
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX20
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX20 - Success
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(eigen) is deprecated, call
+  FetchContent_MakeAvailable(eigen) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(eigen) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/eigen.cmake:39 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/FindEigen3.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:182 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (deprecated) at /private/tmp/mcunet-tflite-build/eigen/CMakeLists.txt:29 (cmake_policy):
+  The OLD behavior for policy CMP0146 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- 
+-- Configured Eigen 5.0.1-dev
+-- 
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(farmhash) is deprecated, call
+  FetchContent_MakeAvailable(farmhash) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(farmhash) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/farmhash.cmake:37 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findfarmhash.cmake:34 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:183 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- Performing Test FARMHASH_HAS_BUILTIN_EXPECT
+-- Performing Test FARMHASH_HAS_BUILTIN_EXPECT - Success
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1386 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:398 (FetchContent_Declare)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/fft2d.cmake:22 (OverridableFetchContent_Declare)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findfft2d.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:184 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(fft2d) is deprecated, call
+  FetchContent_MakeAvailable(fft2d) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(fft2d) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/fft2d.cmake:33 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findfft2d.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:184 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(flatbuffers) is deprecated, call
+  FetchContent_MakeAvailable(flatbuffers) instead.  Policy CMP0169 can be set
+  to OLD to allow FetchContent_Populate(flatbuffers) to be called directly
+  for now, but the ability to call it with declared details will be removed
+  completely in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/flatbuffers.cmake:37 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/FindFlatBuffers.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:185 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- Proceeding with version: 25.9.23.0
+-- Looking for strtof_l
+-- Looking for strtof_l - not found
+-- Looking for strtoull_l
+-- Looking for strtoull_l - not found
+-- Looking for realpath
+-- Looking for realpath - found
+-- CMAKE_CXX_FLAGS: 
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(gemmlowp) is deprecated, call
+  FetchContent_MakeAvailable(gemmlowp) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(gemmlowp) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/gemmlowp.cmake:38 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findgemmlowp.cmake:18 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:186 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (deprecated) at /private/tmp/mcunet-tflite-build/gemmlowp/contrib/CMakeLists.txt:5 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(cpuinfo) is deprecated, call
+  FetchContent_MakeAvailable(cpuinfo) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(cpuinfo) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/cpuinfo.cmake:32 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findcpuinfo.cmake:16 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:191 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (deprecated) at /private/tmp/mcunet-tflite-build/cpuinfo/CMakeLists.txt:1 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(ml_dtypes) is deprecated, call
+  FetchContent_MakeAvailable(ml_dtypes) instead.  Policy CMP0169 can be set
+  to OLD to allow FetchContent_Populate(ml_dtypes) to be called directly for
+  now, but the ability to call it with declared details will be removed
+  completely in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/ml_dtypes.cmake:39 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findml_dtypes.cmake:19 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:192 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(ruy) is deprecated, call
+  FetchContent_MakeAvailable(ruy) instead.  Policy CMP0169 can be set to OLD
+  to allow FetchContent_Populate(ruy) to be called directly for now, but the
+  ability to call it with declared details will be removed completely in a
+  future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/ruy.cmake:32 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/Findruy.cmake:16 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:193 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:23 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:40 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:61 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:86 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:97 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:114 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:148 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:175 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:194 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:207 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:260 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:291 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:304 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:343 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:362 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:385 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:422 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:442 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:457 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:471 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:483 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:511 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:540 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:555 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:568 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:599 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:623 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:643 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:670 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:701 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:725 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:748 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:773 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:797 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:820 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:845 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:869 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:892 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:909 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:939 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:965 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:977 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1027 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1053 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1085 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1102 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1134 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1155 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1180 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1196 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1221 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/CMakeLists.txt:1284 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/profiler/CMakeLists.txt:17 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tflite-build/ruy/cmake/ruy_cc_library.cmake:89 (install):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tflite-build/ruy/ruy/profiler/CMakeLists.txt:31 (ruy_cc_library)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tf-source/tensorflow/lite/CMakeLists.txt:314 (populate_tflite_source_vars):
+  Policy CMP0219 is not set: Macro invocations preserve backslashes in
+  arguments.  Run "cmake --help-policy CMP0219" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Command "populate_tflite_source_vars" called with arguments containing
+  backslashes.
+
+  Since the policy is not set, backslashes in the arguments:
+
+   "(_test)\.(cc|h)$"
+
+  will be interpreted as escape sequences for compatibility.
+
+  Set the policy to NEW to instead pass
+
+   "(_test)\\.(cc|h)$"
+
+  so that argument parsing will preserve the original values.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (author) at /private/tmp/mcunet-tflite-build-tools/lib/python3.11/site-packages/cmake/data/share/cmake-4.4/Modules/FetchContent.cmake:1968 (message):
+  Calling FetchContent_Populate(protobuf) is deprecated, call
+  FetchContent_MakeAvailable(protobuf) instead.  Policy CMP0169 can be set to
+  OLD to allow FetchContent_Populate(protobuf) to be called directly for now,
+  but the ability to call it with declared details will be removed completely
+  in a future version.
+Call Stack (most recent call first):
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/OverridableFetchContent.cmake:537 (FetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/protobuf.cmake:37 (OverridableFetchContent_Populate)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/tools/cmake/modules/FindProtobuf.cmake:16 (include)
+  /private/tmp/mcunet-tf-source/tensorflow/lite/profiling/proto/CMakeLists.txt:15 (find_package)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+CMake Warning (deprecated) at /private/tmp/mcunet-tflite-build/protobuf/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- 
+-- 3.21.9.0
+-- Performing Test protobuf_HAVE_LD_VERSION_SCRIPT
+-- Performing Test protobuf_HAVE_LD_VERSION_SCRIPT - Failed
+-- Performing Test protobuf_HAVE_BUILTIN_ATOMICS
+-- Performing Test protobuf_HAVE_BUILTIN_ATOMICS - Success
+CMake Warning (policy) at /private/tmp/mcunet-tf-source/tensorflow/lite/tools/benchmark/CMakeLists.txt:19 (populate_source_vars):
+  Policy CMP0219 is not set: Macro invocations preserve backslashes in
+  arguments.  Run "cmake --help-policy CMP0219" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Command "populate_source_vars" called with arguments containing
+  backslashes.
+
+  Since the policy is not set, backslashes in the arguments:
+
+   "(_test|_plus_flex_main|_performance_options.*)\.cc$"
+
+  will be interpreted as escape sequences for compatibility.
+
+  Set the policy to NEW to instead pass
+
+   "(_test|_plus_flex_main|_performance_options.*)\\.cc$"
+
+  so that argument parsing will preserve the original values.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (policy) at /private/tmp/mcunet-tf-source/tensorflow/lite/examples/label_image/CMakeLists.txt:19 (populate_source_vars):
+  Policy CMP0219 is not set: Macro invocations preserve backslashes in
+  arguments.  Run "cmake --help-policy CMP0219" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Command "populate_source_vars" called with arguments containing
+  backslashes.
+
+  Since the policy is not set, backslashes in the arguments:
+
+   "_test\.cc$"
+
+  will be interpreted as escape sequences for compatibility.
+
+  Set the policy to NEW to instead pass
+
+   "_test\\.cc$"
+
+  so that argument parsing will preserve the original values.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+-- Configuring done (81.9s)
+-- Generating done (0.2s)
+-- Build files have been written to: /private/tmp/mcunet-tflite-build

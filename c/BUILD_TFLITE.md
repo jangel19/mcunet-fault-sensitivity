@@ -16,7 +16,7 @@ build tools separate from the experiment environment:
 ```sh
 python3.11 -m venv /tmp/tflite-build-tools
 source /tmp/tflite-build-tools/bin/activate
-python -m pip install cmake==4.4.0 ninja
+python -m pip install cmake==4.4.0 ninja==1.13.2
 cmake --version
 ninja --version
 cc --version
@@ -58,6 +58,7 @@ for header in (source / 'tensorflow').rglob('*.h'):
     shutil.copy2(header, destination)
 PY
 install_name_tool -id @rpath/libtensorflowlite_c.dylib "$TFLITE/lib/libtensorflowlite_c.dylib"
+codesign --force --sign - "$TFLITE/lib/libtensorflowlite_c.dylib"
 otool -L "$TFLITE/lib/libtensorflowlite_c.dylib"
 git -C "$TF_SOURCE" rev-parse HEAD > "$TFLITE/source-revision.txt"
 cp "$TF_BUILD/CMakeCache.txt" "$TFLITE/CMakeCache.txt"
@@ -71,7 +72,9 @@ it does not explicitly select reference kernels. tests check whether this
 particular library observes in-place weight mutations.
 
 on mac, the dylib install name should be `@rpath/libtensorflowlite_c.dylib`.
-the makefile embeds an rpath to `$(TFLITE)/lib`. `otool -L c/run_trials` should
+after changing the install name, ad-hoc signing refreshes the mac arm64
+signature. this is local signing, not distribution notarization. the makefile
+embeds an rpath to `$(TFLITE)/lib`. `otool -L c/run_trials` should
 show that install name after linking. if it instead shows a build-directory
 path, fix the installed dylib id above and rebuild the executables. inspect
 other dependencies with `otool -L` if dyld still fails. linux would need a
@@ -90,3 +93,20 @@ are quoted for spaces. paths passed through `make -C c` are relative to `c/`,
 so use absolute paths for custom locations. `make test` uses 200 images and
 writes reference files into the supplied subset. `make smoke` uses 20 images,
 ops 1, 62 and 120, bits 0 and 7, with a 30-trial limit.
+
+## verified fresh setup
+
+these steps were exercised in separate temporary directories on 2026-10-21:
+source tag `v2.21.0`, revision `a481b10260dfdf833a1b16007eead49c1d7febf3`,
+cmake 4.4.0, ninja 1.13.2, release build with the flags above and two build
+jobs. the installed headers and dylib built both c executables from source.
+with an empty venv installed from the pinned requirements, `make test`
+passed 99 checks, zero failures and zero skips. `make smoke` completed all
+30 trials with a clean model buffer. repository, model, subset, python and
+library paths included spaces.
+
+see `results/setup_fresh_tflite_provenance.json` for the source and dependency
+revisions, exact configuration and installed binary hash, plus
+`results/setup_tflite_CMakeCache.txt` and the associated build/test logs.
+this new library was used for setup validation only. it did not replace the
+original library or produce the random campaign results.

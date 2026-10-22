@@ -9,11 +9,16 @@ python -m pip install -r requirements.txt
 python -m pip check
 ```
 
-`requirements.txt` is the full installed-package snapshot from the working
+`requirements.txt` is the runtime package snapshot from the working
 venv, including tensorflow 2.21.0, tflite 2.18.0 (the flatbuffer schema), numpy
 2.4.6, torch 2.14.0 and torchvision 0.29.0. these are the observed versions,
-not a claim that other platforms or python versions work. the current venv
-passes `pip check`; a clean online dependency install has not been tested.
+not a claim that other platforms or python versions work. installation from
+the index into an empty temporary venv succeeded, `pip check` passed, and
+the unchanged c/python suite passed all 99 checks with that fresh environment.
+see `results/setup_fresh_environment.log` and
+`results/setup_fresh_environment_test.log`. pip build tooling is not pinned
+by this runtime snapshot; the original venv has pip 24.0, setuptools 78.1.0
+and wheel 0.48.0.
 
 ## optional mcunet source dependency
 

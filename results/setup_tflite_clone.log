@@ -1,0 +1,19 @@
+Cloning into '/private/tmp/mcunet-tf-source'...
+Note: switching to 'a481b10260dfdf833a1b16007eead49c1d7febf3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+Updating files:  35% (12552/35584)Updating files:  36% (12811/35584)Updating files:  37% (13167/35584)Updating files:  38% (13522/35584)Updating files:  39% (13878/35584)Updating files:  40% (14234/35584)Updating files:  41% (14590/35584)Updating files:  42% (14946/35584)Updating files:  43% (15302/35584)Updating files:  44% (15657/35584)Updating files:  45% (16013/35584)Updating files:  46% (16369/35584)Updating files:  47% (16725/35584)Updating files:  48% (17081/35584)Updating files:  49% (17437/35584)Updating files:  50% (17792/35584)Updating files:  51% (18148/35584)Updating files:  52% (18504/35584)Updating files:  53% (18860/35584)Updating files:  54% (19216/35584)Updating files:  55% (19572/35584)Updating files:  56% (19928/35584)Updating files:  57% (20283/35584)Updating files:  58% (20639/35584)Updating files:  59% (20995/35584)Updating files:  60% (21351/35584)Updating files:  61% (21707/35584)Updating files:  62% (22063/35584)Updating files:  63% (22418/35584)Updating files:  64% (22774/35584)Updating files:  65% (23130/35584)Updating files:  66% (23486/35584)Updating files:  67% (23842/35584)Updating files:  68% (24198/35584)Updating files:  69% (24553/35584)Updating files:  69% (24693/35584)Updating files:  70% (24909/35584)Updating files:  71% (25265/35584)Updating files:  72% (25621/35584)Updating files:  73% (25977/35584)Updating files:  74% (26333/35584)Updating files:  75% (26688/35584)Updating files:  76% (27044/35584)Updating files:  77% (27400/35584)Updating files:  78% (27756/35584)Updating files:  79% (28112/35584)Updating files:  80% (28468/35584)Updating files:  81% (28824/35584)Updating files:  82% (29179/35584)Updating files:  83% (29535/35584)Updating files:  84% (29891/35584)Updating files:  85% (30247/35584)Updating files:  86% (30603/35584)Updating files:  87% (30959/35584)Updating files:  88% (31314/35584)Updating files:  89% (31670/35584)Updating files:  90% (32026/35584)Updating files:  91% (32382/35584)Updating files:  92% (32738/35584)Updating files:  93% (33094/35584)Updating files:  94% (33449/35584)Updating files:  95% (33805/35584)Updating files:  96% (34161/35584)Updating files:  97% (34517/35584)Updating files:  98% (34873/35584)Updating files:  99% (35229/35584)Updating files: 100% (35584/35584)Updating files: 100% (35584/35584), done.
