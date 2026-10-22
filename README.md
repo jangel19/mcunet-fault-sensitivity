@@ -260,6 +260,51 @@ python scripts/summarize_random.py --csv results/my_random_k30.csv \
   --subset subset --seed 20261021 --k 30 --out results/my_random_report.md
 ```
 
+## figures
+
+with the project venv active, regenerate the week 6 graphs from the repo root:
+
+```sh
+python scripts/make_figures.py
+```
+
+the script saves png and svg copies in `results/figures/`:
+
+- `01_mismatch_by_bit`: random mean top-1 mismatch (%) for each bit.
+- `02_accuracy_drop_by_bit`: random mean accuracy drop in percentage points,
+  including negative values where faulted accuracy improved.
+- `03_mismatch_by_layer`: random mean top-1 mismatch (%) in numeric operator
+  order, with ops 1 and 3 highlighted.
+- `04_mismatch_heatmap`: random mean top-1 mismatch (%) in all 14 x 8 cells.
+- `05_corner_vs_random_by_bit`: mismatch (%) for the two sampling designs.
+  rule-weighted corner trials and seeded random draws are not comparable as
+  unbiased estimates.
+
+top-1 mismatch is `100 * (n_catastrophic + n_due) / n_images` per trial.
+accuracy drop is `100 * (acc_clean - acc_faulted)` per trial, relative to
+130/200 clean predictions (65%). summaries average trial rates within each
+cell, then weight selected layers and bits equally. repeated faults stay in.
+
+random totals are 3,360 trials and 672,000 trial-image evaluations: each bit
+uses 420 trials and 84,000 evaluations, each layer 240 and 48,000, and each
+cell 30 and 6,000. corner totals are 560 rule-weighted trials (528 distinct
+faults) and 112,000 evaluations, with 70 trials and 14,000 evaluations per
+bit. all trials reuse the same fixed 200 images.
+
+the first three figures include the report's approximate 95% monte carlo
+intervals using stratified standard errors by layer-bit cell. the script
+also implements its zero-effect and zero-variance fallbacks, leaves bounds
+unclipped, and checks all random group means and interval endpoints against
+the report to three decimals before drawing. these intervals describe weight
+draws conditional on the fixed images, model and library.
+
+input paths can be set with `--random-csv`, `--corner-csv` and `--report`;
+choose another destination with `--out-dir`. defaults use the tracked week 6
+campaigns and report. the script requires their balanced 30-draw and five-rule
+cells. pinned plotting dependencies, the bundled dejavu sans font, fixed svg
+ids and timestamp-free output make regeneration deterministic in the same
+environment. pngs are 180 dpi; svgs retain scalable text outlines.
+
 ## status and remaining work
 
 week 4 inventory and manual stage map exist, week 5 fault design exists, and
