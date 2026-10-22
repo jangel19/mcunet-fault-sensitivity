@@ -1,0 +1,7 @@
+mode=random layers=14 bits=8 images=200 seed=20261021 -> results/random_pilot_k1.csv
+  20 trials, 18.7 s
+  40 trials, 37.3 s
+  60 trials, 55.9 s
+  80 trials, 75.1 s
+  100 trials, 94.0 s
+done: 112 trials in 105.2 s, model buffer clean: yes
