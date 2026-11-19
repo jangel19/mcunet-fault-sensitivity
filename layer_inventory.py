@@ -17,9 +17,8 @@ def describe_tensor(subgraph, tensor_index):
     scale = None
     zero_point = None
     if quant is not None and quant.ScaleLength() > 0:
-        # TFLite supports per-channel quantization (multiple scale/zero_point
-        # pairs per tensor) but MCUNet's export uses per-tensor quantization,
-        # so index 0 is the only entry that exists here.
+        # Legacy CSV summary keeps entry 0 only. MCUNet weights are per-channel;
+        # use scripts/propagation.py metadata for complete arrays and axes.
         scale = quant.Scale(0)
         zero_point = quant.ZeroPoint(0)
  

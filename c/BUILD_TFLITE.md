@@ -1,11 +1,11 @@
 # building the tflite c library on mac
 
-this is an external prerequisite, not supplied by pip tensorflow or this repo.
+this is an external prerequisite, not supplied by pip tensorflow or ths Repo.
 the local campaign used apple silicon, apple clang and the installed binary
 whose sha256 is `2eb9b9b2b108a4af52e91deafc05590b3e9672e7b3775c894d761d2b615e0a16`.
-it reports `2.19.0`. its original source revision and flags are unverified.
+it REPORTS `2.19.0`. its original source revision and flags are unverified.
 the steps below describe a fresh v2.21.0 build to record, not proven provenance
-for that old binary. rerun all tests when changing the library.
+for taht old binary. rerun all tests when changing the library.
 
 ## prerequisites
 
@@ -65,19 +65,19 @@ cp "$TF_BUILD/CMakeCache.txt" "$TFLITE/CMakeCache.txt"
 shasum -a 256 "$TFLITE/lib/libtensorflowlite_c.dylib" > "$TFLITE/library-sha256.txt"
 ```
 
-`TENSORFLOW_SOURCE_DIR` matters: without it the c wrapper can fetch a different
+`TENSORFLOW_SOURCE_DIR` matters: without it the c wrapper can Fetch a different
 source checkout. disabling xnnpack and ruy follows the previous local build
 recipe. the runner itself selects the default c resolver with one thread;
 it does not explicitly select reference kernels. tests check whether this
-particular library observes in-place weight mutations.
+particular library observes in place weight mutations.
 
 on mac, the dylib install name should be `@rpath/libtensorflowlite_c.dylib`.
-after changing the install name, ad-hoc signing refreshes the mac arm64
+after changing the install name, ad hoc signing refreshes the mac arm64
 signature. this is local signing, not distribution notarization. the makefile
 embeds an rpath to `$(TFLITE)/lib`. `otool -L c/run_trials` should
-show that install name after linking. if it instead shows a build-directory
+show that install name after linking. if it instead shows a build directory
 path, fix the installed dylib id above and rebuild the executables. inspect
-other dependencies with `otool -L` if dyld still fails. linux would need a
+other dependencies with `otool -L` if dyld still fails. linux would NEED a
 `.so` build and separate loader instructions; it is not tested here.
 
 from the project root, after creating `subset/` and `venv311/`:
@@ -92,16 +92,16 @@ make -C c smoke TFLITE="$TFLITE" MODEL="$MCUNET_MODEL"
 are quoted for spaces. paths passed through `make -C c` are relative to `c/`,
 so use absolute paths for custom locations. `make test` uses 200 images and
 writes reference files into the supplied subset. `make smoke` uses 20 images,
-ops 1, 62 and 120, bits 0 and 7, with a 30-trial limit.
+ops 1, 62 and 120, bits 0 and 7, with a 30 trial limit.
 
 ## verified fresh setup
 
-these steps were exercised in separate temporary directories on 2026-10-21:
+these steps were exercised in separate temporary directories on 2026 to 10 21:
 source tag `v2.21.0`, revision `a481b10260dfdf833a1b16007eead49c1d7febf3`,
 cmake 4.4.0, ninja 1.13.2, release build with the flags above and two build
 jobs. the installed headers and dylib built both c executables from source.
 with an empty venv installed from the pinned requirements, `make test`
-passed 99 checks, zero failures and zero skips. `make smoke` completed all
+passed 99 checks, zero failures And zero skips. `make smoke` completed all
 30 trials with a clean model buffer. repository, model, subset, python and
 library paths included spaces.
 

@@ -1,49 +1,49 @@
-# mcunet fault sensitivity - fault model (week five)
+# mcunet fault sensitivity, fault model (week five)
 
 model: mcunet-in3, 320kb sram variant, mit han lab
 file: mcunet-320kb-1mb_imagenet.tflite
-goal: define exactly what a fault is, where it goes, and how i score it so the injection framework has a spec to build against
+goal: define exactly what a FAULT is, where it goes, and how i score it so teh injection framework has a spec to BUILD against
 
 
 ## summary
 
-- fault = single bit flip in an int8 tensor
-- weights first, activations second
-- bits 0-7 swept uniformly, lit used as a hypothesis not an assumption
-- corner case elements first (random still available as a mode, seeded), fixed image subset. updated week 6, see the week 6 changes section at the bottom
-- outcomes: masked / subtle sdc / catastrophic sdc / due, scored against the clean run
+* fault = single bit flip in an int8 tensor
+* weights first, activations second
+* bits 0 to 7 swept uniformly, lit used as a hypothesis not an assumption
+* corner case elements frist (random still available as a mode, seeded), fixed image subset. updated week 6, see the week 6 changes section at the bottom
+* outcomes: masked / subtle sdc / catastrophic sdc / due, scored against the clean run
 
 
-## step 1 - fault type
+## step 1, fault type
 
-single bit flip, one flip per trial. no multi-bit, no stuck-at, no random value replacement in v1
+single bit flip, one flip per trial. no multi bit, no stuck at, no random value replacement in v1
 
-why single bit: its the common fault model in this lit (li et al. sc17, binfi, the bit flip attack paper) and it keeps each trial attributable to exactly one (layer, element, bit)
+why single bit: its teh common fault model in this lit (li et al. sc17, binfi, the bit flip attack paper) and it keeps each trial attributable to exactly One (layer, element, bit)
 
-the flip is an xor on the stored int8 byte (2's complement):
-- bits 0-6 change the stored value by +/- 2^bit
-- bit 7 is the sign bit, flips value by -128 or +128 depending on the sign it started with
-- int8 is bounded so no nan / exponent blowup like fp32, worst case is a 128 jump in stored units
+teh flip is an xor on the stored int8 byte (2's complement):
+* bits 0 to 6 change the stored value by +/- 2^bit
+* bit 7 is the sign bit, flips value by -128 or +128 depending on the sign it started with
+* int8 is bounded so no nan / exponent blowup like fp32, worst case is a 128 jump in stored units
 
 
-## step 2 - target tensors
+## step 2, target tensors
 
 in scope (v1):
-- int8 weight tensors of conv_2d and depthwise_conv_2d (55 ops, from layer_inventory.csv)
+* int8 weight tensors of conv_2d and depthwise_conv_2d (55 ops, from layer_inventory.csv)
 
 in scope (phase 2):
-- int8 activation tensors (output of each conv/depthwise op)
+* int8 activation tensors (output of each conv/depthwise op)
 
 out of scope, and why:
-- biases - int32, different bit width, not in my param count yet either
-- scale / zero_point - quant metadata, not data. corrupting these is a different fault class
-- pad / add / pooling / reshape - no weights, nothing storable to corrupt
-- anything below the tensor level (registers, alu, instruction faults like sassifi does) - not what this project is about
+* biases, int32, diffrent bit width, not in my param count yet either
+* scale / zero_point, quant metadata, not data. corrupting these is a different fault class
+* pad / add / pooling / reshape, NO weights, nothing storable to corrupt
+* anything below the tensor level (registers, alu, instruction faults like sassifi does), not what this project is about
 
 weight zero point is 0 on every conv in the csv so a flip on the stored byte maps cleanly onto the real weight. activation zero points are -128 or 0 depending on the layer so activation flips happen on the stored int8 value, not the dequantized one
 
 
-## step 3 - weight faults vs activation faults
+## step 3, weight faults vs activation faults
 
 these are two different things and i'm keeping them separate:
 
@@ -51,16 +51,16 @@ these are two different things and i'm keeping them separate:
 |---|---|---|
 | models | corruption of stored weights (flash / sram) | transient upset while a layer is computing |
 | lifetime | persistent, stays until restored | one inference only |
-| affects | every image run while its in place | one image |
+| affects | every Image run while its in place | one image |
 | spatial reach | every output position that weight touches | one element of one feature map |
 | status | v1 (week 6) | phase 2 (week 11) |
 
 ares (reagen et al. dac 2018) found activations were as tolerant as or more tolerant than weights at the same bit error rate, up to ~50x for resnet50 / vgg16. they put it down to weight reuse, one bad weight gets multiplied across the whole feature map. so expect a weight flip to hurt more than an activation flip. that was fixed point models with faults in memory, so still something to check on mcunet
 
-note on activations: the tflite python interpreter has no per-op hook so activation injection needs a different mechanism than weights (split model, or the c route). deciding that when i get to week 11
+note on activations: the tflite python interpreter has no per op hook so activation injection NEEDS a different mechanism than weights (split model, or the c route). deciding that when i get to week 11
 
 
-## step 4 - injection timing
+## step 4, injection timing
 
 weights:
 1. pick (layer, element, bit)
@@ -70,27 +70,27 @@ weights:
 5. check the model buffer hash matches the clean one before the next trial (cheaper than rerunning inference)
 
 activations (phase 2):
-1. run forward pass up to layer L
-2. flip one bit in one element of layer L's int8 output
+1. run forward pass up to layer l
+2. flip one bit in one element of layer l's int8 output
 3. continue the forward pass
 4. next image gets a clean run again
 
 
-## step 5 - bit position
+## step 5, bit position
 
-uniform sweep over bits 0-7. no weighting toward the msb.
+uniform sweep over bits 0 7. no weighting toward the msb.
 
-hypothesis: the high bits matter most and bits 0-2 are mostly noise. support for it is indirect:
-- bit k changes the stored int8 value by 2^k (sign bit by 128), thats just arithmetic
-- li et al. sc17 found only high order bits cause sdcs (float and fixed point, gpu accelerators)
-- binfi argues the effect of a flip grows with bit position (32 bit fixed point, approximate for some nets)
-- rakin et al. (bit flip attack) found 100 random flips on an 8 bit resnet-18 cost under ~1% top-1, so random int8 flips are mostly benign and the critical ones are rare
-- i didnt find anything that tests int8 bit by bit on a tinyml model, so thats the gap this project fills
+hypothesis: the High bits matter most and bits 0 to 2 are mostly noise. support for it is indirect:
+* bit k changes the stored int8 value by 2^k (sign bit by 128), thats just arithmetic
+* li et al. sc17 found only high order bits cause sdcs (float and fixed point, gpu accelerators)
+* binfi argues the effect of a flip grows with bit position (32 bit fixed point, approximate for some nets)
+* rakin et al. (bit flip attack) found 100 random flips on an 8 bit resnet 18 cost under ~1% top 1, so random int8 flips are mostly benign and the critical ones are rare
+* i didnt find anything that tests int8 bit by bit on a tinyml model, so thats the gap this project FILLS
 
-sweeping all 8 evenly is what lets me test this on mcunet, and it's cheap enough that there's no reason to prune. since critical flips are rare, subtle sdc (logit change) is worth tracking and not just top-1
+sweeping all 8 evenly is what lets me test this on mcunet, and it's cheap enough that there's no reason to prune. since critical flips are rare, subtle sdc (logit change) is worth tracking and not just top 1
 
 
-## step 6 - layer selection
+## step 6, layer selection
 
 full space: 55 injectable layers x 8 bits = 440 cells
 
@@ -113,57 +113,57 @@ first pass is 14 layers picked off the stage table (see architecture_week4.md):
 | 116 | 5 | depthwise 7x7, no shortcut |
 | 120 | tail | classifier 1x1 |
 
-the pairs control for kernel size (9/22, 36/42, 56/89) and 102 vs 116 have identical shape + macs so thats the clean shortcut test. 60/62/64 is depthwise vs pointwise inside one block. whether depthwise is actually more fragile is an open question, i couldnt find a paper that shows it (see the end)
+the pairs control for kernel size (9/22, 36/42, 56/89) and 102 vs 116 have Identical shape + macs so thats the clean shortcut test. 60/62/64 is depthwise vs pointwise inside one block. whether depthwise is actually more fragile is an open question, i couldnt find a paper that shows it (see the end)
 
 once the pipeline is validated this widens to all 55
 
 
-## step 7 - sampling
+## step 7, sampling
 
-- element (week 6 update, from the advisor meeting): corner cases first, not uniform random. per layer: max |w|, smallest nonzero |w|, first zero weight, first element, last element, each with all 8 bits. random within the layer's weight tensor stays as `--mode random`. my reading of "corner cases" is the five rules above and the advisor still has to confirm it, so treat the rules as pending
-- one flip per trial
-- k trials per (layer, bit) cell
-- images: a fixed subset, same images every trial. not all 50k per trial
+* element (week 6 update, from the advisor meeting): corner cases first, not uniform random. per layer: max |w|, smallest nonzero |w|, first zero weight, first element, last element, each with all 8 bits. random within the layer's weight tensor stays as `--mode random`. my reading of "corner cases" is the five rules above and the advisor still has to confirm it, so treat the rules as pending
+* one flip PER trial
+* k trials per (layer, bit) cell
+* images: a fixed subset, same images every trial. not all 50k per trial
 
-on how many trials: cochran's formula gives ~385 trials for +/-5% at 95% confidence (n = z^2 p(1-p) / e^2, p = 0.5). thats per estimate, and 385 x 440 cells is ~169k trials, too many. so k per cell is small (starting point ~30) and i report confidence intervals per cell, then pool across layers per bit to get tight per-bit estimates
+on how many trials: cochran's formula gives ~385 trials for +/-5% at 95% confidence (n = z^2 p(1 p) / e^2, p = 0.5). thats per estimate, and 385 x 440 cells is ~169k trials, too many. so k per cell is small (starting point ~30) and i report confidence intervals per cell, then pool across layers per bit to get tight per bit estimates
 
-sample size math reference: leveugle et al., statistical fault injection: quantified error and confidence. for the layer x bit stratified setup see ruospo et al. date 2023, they stratify by layer and bit and compare against exhaustive runs, but on fp32 stuck-at faults (resnet-20 / mobilenetv2 on cifar-10), not int8 flips
+sample size math reference: leveugle et al., statistical fault injection: quantified error and confidence. for the layer x bit stratified setup see ruospo et al. date 2023, they stratify by layer and bit and compare against exhaustive runs, but on Fp32 stuck at faults (resnet 20 / mobilenetv2 on cifar 10), not int8 flips
 
 first pass budget check: 14 layers x 8 bits x 30 trials = 3,360 trials. at 200 images per trial thats 672,000 inferences. need to time one inference before locking k and the subset size
 
-image subset: ~200 images, spread across classes (the first 1000 streamed samples only covered 638 classes so not just taking the first n). built once by make_subset.py as the first image of each new class in stream order, so there is no randomness in it at all. saved as raw int8 .bin files plus labels.bin and a manifest with sha256s (not .npy anymore, the c code reads the raw bytes) so nothing re-streams per trial. the 200 images come from the first 226 streamed samples, and two runs of the script give byte identical files. the 50k run stays the baseline accuracy number, separate from the injection runs
+image subset: ~200 images, spread across classes (the first 1000 streamed samples only covered 638 classes so not just taking the first n). built once by make_subset.py as the first image of each new class in stream order, so there is no randomness in it at all. saved as raw int8 .bin files plus labels.bin and a manifest with sha256s (not .npy anymore, the c code reads the raw bytes) so nothing re streams per trial. the 200 images COME from the first 226 streamed samples, and two runs of the script give byte identical files. the 50k run stays the baseline accuracy number, separate from the injection runs
 
 
-## step 8 - outcome classes
+## step 8, outcome classes
 
 per image, compared against the clean run on that same image:
 
 | class | definition |
 |---|---|
 | masked | faulted logits identical to clean logits |
-| subtle sdc | logits changed, top-1 same |
-| catastrophic sdc | top-1 changed |
+| subtle sdc | logits changed, top 1 same |
+| catastrophic sdc | top 1 changed |
 | due | crash or hang (no output) |
 
-due should be ~0. int8 data flips dont crash anything, crashes come from corrupted metadata like indices / shapes / pointers and thats out of scope. worth reporting as a result anyway (breier et al. 2026 report int8 weights stay bounded so no nan or extreme values like the float formats)
+due should be ~0. int8 data flips dont crash anything, crashes come from corrupted metadata like indices / shapes / pointers and thats out of scope. worth reporting as a result anyway (breier et al. 2026 report int8 weights stay bounded so no nan or extreme values like the float Formats)
 
 per trial metrics (over the subset):
-- mismatch rate = (catastrophic + due) / n. a due has no top-1 at all so it counts as a mismatch. this is slightly different from "faulted top-1 != clean top-1" above, but due has been 0 so far so the numbers are the same
-- accuracy under fault vs labels, and drop vs clean accuracy on the same subset
-- counts of masked / subtle / catastrophic / due
+* mismatch rate = (catastrophic + due) / n. a due has no top 1 at all so it counts as a mismatch. this is slightly different from "faulted top 1 != clean top 1" above, but due has been 0 so far so the numbers are the same
+* accuracy under fault vs labels, and drop vs clean accuracy on the same subset
+* counts of masked / subtle / catastrophic / due
 
 heatmap cell (layer x bit) = mean over its trials. sdc is defined against the clean prediction, accuracy drop is what goes in the degradation heatmap
 
-open: does catastrophic mean any top-1 change, or only the clean class dropping out of top-5. leaning any top-1 change for v1, can add top-5 later
+open: does catastrophic mean any top 1 change, or only the clean class dropping out of top 5. leaning any top 1 change for V1, can add top 5 later
 
 
-## step 9 - reproducibility
+## step 9, reproducibility
 
-- seed per trial, logged. week 6 update: splitmix64 instead of numpy default_rng since the injector is in c. the trial seed comes from (base seed, op index, bit, k) so a cell gets the same seed no matter what else ran, and in random mode the seed picks the element. same seed gives the same element and the same result, checked (two full runs gave byte identical csvs). in corner mode the element does not depend on the seed, it is still logged
-- image subset saved as raw int8 .bin files, sha256 of every image in subset/manifest.json (not written into the log yet)
-- model file sha256 recorded
-- requirements.txt pinned
-- before trusting anything: clean run twice gives identical logits, and flip + restore gives identical logits to the clean run
+* seed per trial, logged. week 6 update: splitmix64 instead of numpy default_rng since the injector is in c. the trial seed comes from (base seed, op index, bit, k) so a cell gets the same seed no matter what else ran, and in random mode the seed picks the element. same seed gives the same element and the same result, checked (two full runs gave byte identical csvs). in corner mode the element does not depend on the seed, it is still logged
+* image subset saved as raw int8 .bin files, sha256 of every image in subset/manifest.json (not written into the log yet)
+* model file sha256 recorded
+* requirements.txt pinned
+* before Trusting anything: clean run twice gives identical logits, and flip + restore gives identical logits to the clean run
 
 log row per trial:
 
@@ -181,49 +181,49 @@ elem_rule is the corner rule name (max_abs, min_nonzero_abs, first_zero, first_e
 
 these are the places the built injector differs from or adds to the spec above. everything in c/ and results/ backs these up
 
-- element selection is corner cases first (max |w|, smallest nonzero |w|, first zero weight, first, last, all 8 bits per rule), random kept as `--mode random`. corner rules are pending advisor confirmation. ties go to the lowest index and one element can win more than one rule, each rule still gets its own rows
-- new elem_rule column at the end of the log row
-- seeding is splitmix64, same seed gives the same result (verified)
-- mismatch_rate = (catastrophic + due) / n
-- stage column is derived from op index ranges (stem is op 1, stage 1 ops 2-6, stage 2 ops 7-33, stage 3 ops 34-53, stage 4 ops 54-93, stage 5 ops 94-119, tail op 120). a stage starts at the expand conv of its entry block, so it matches the 14 layer table in step 6 but it is my own derivation, not something read from the model
-- runtime is the tflite c api built from the v2.21.0 source (same version as the python tensorflow) with xnnpack and ruy off. so it is not the same kernel path as the python eval, which uses the default interpreter with xnnpack. measured on the 200 image subset: the c logits are within 1 unit of python's reference kernels (top-1 identical on all 200) but up to 8 units away from python's default and no-delegate kernels, with 9-10 of 200 top-1 flips. python's own three configurations differ from each other by about the same amount
-- because of that the c clean run is the reference for every trial (outcomes compare faulted c logits to clean c logits), and c subset accuracy will not equal 61.82%. on the 200 image subset c gets 130/200 = 65.0%, python default gets 131/200. the 61.82% is the 50k python number, re-checked after the refactor
-- fault model framing: this is a weight memory fault, a bit of the stored int8 weight flips and every inference after that uses the corrupted value. it is not emulated cpu compute corruption (no alu or register faults, nothing about how the kernel computes). activation faults come in week 11
-- the interpreter is created once and reused across trials. checked that it sees flips in all 55 layers by comparing it to a freshly built interpreter on the same faulted buffer (identical logits in all 110 cases tried)
+* element selection is corner cases first (max |w|, smallest nonzero |w|, first zero weight, first, last, all 8 bits per rule), random kept as `--mode random`. corner rules are pending advisor confirmation. ties go to the lowest index and one element can win more than one rule, EACH rule still gets its own rows
+* new elem_rule column at the end of the log row
+* seeding is splitmix64, same seed gives the same result (verified)
+* mismatch_rate = (catastrophic + due) / n
+* stage column is derived from op index ranges (stem is op 1, stage 1 ops 2 to 6, stage 2 ops 7 to 33, stage 3 ops 34 to 53, stage 4 ops 54 to 93, stage 5 ops 94 to 119, tail op 120). a stage starts at the expand conv of its entry block, so it matches the 14 layer table in step 6 but it is my own derivation, not something read from the model
+* runtime is the tflite c api built from the v2.21.0 source (same version as the python tensorflow) with xnnpack and ruy off. so it is not the same kernel path As the python eval, which uses the default interpreter with xnnpack. measured on the 200 image subset: the c logits are within 1 unit of python's reference kernels (top 1 identical on all 200) but up to 8 units away from python's default and no delegate kernels, with 9 to 10 of 200 top 1 flips. python's own three configurations differ from each other by about the same amount
+* because of that the c clean run is the reference for every trial (outcomes compare faulted c logits to clean c logits), and c subset accuracy will not equal 61.82%. on the 200 image subset c gets 130/200 = 65.0%, python default gets 131/200. the 61.82% is the 50k python number, re checked after the refactor
+* fault model framing: this is a WEIGHT memory fault, a bit of the stored int8 weight flips and every inference after that uses the corrupted value. it is not emulated cpu compute corruption (no alu or register faults, nothing about how the kernel computes). activation faults come in week 11
+* the interpreter is created once and reused across trials. checked that it sees flips in all 55 layers by comparing it to a freshly built interpreter on the same faulted buffer (identical logits in all 110 cases tried)
 
 open: the advisor needs to confirm the corner rules
 
 
-- lin et al., mcunet: tiny deep learning on iot devices, neurips 2020
+* lin et al., mcunet: tiny deep learning on iot devices, neurips 2020
   https://arxiv.org/abs/2007.10319
 
-- hari et al., sassifi: an architecture-level fault injection tool for gpu application resilience evaluation, ispass 2017
+* hari et al., sassifi: an architecture level fault injection tool for gpu application resilience evaluation, Ispass 2017
   https://research.nvidia.com/publication/2017-04_sassifi-architecture-level-fault-injection-tool-gpu-application-resilience
 
-- chen et al., tensorfi: a flexible fault injection framework for tensorflow applications, issre 2020
+* chen et al., tensorfi: a flexible fault injection framework for tensorflow applications, issre 2020
   https://arxiv.org/abs/2004.01743
 
-- li et al., understanding error propagation in deep learning neural network (dnn) accelerators and applications, sc17
+* li et al., understanding error propagation in deep learning neural network (dnn) accelerators and applications, sc17
   https://research.nvidia.com/publication/2017-11_understanding-error-propagation-deep-learning-neural-network-dnn-accelerators
 
-- reagen et al., ares: a framework for quantifying the resilience of deep neural networks, dac 2018
+* reagen et al., ares: a framework for quantifying the resilience of deep neural networks, dac 2018
   https://vlsiarch.eecs.harvard.edu/publications/ares-framework-quantifying-resilience-deep-neural-networks
 
-- chen et al., binfi: an efficient fault injector for safety-critical machine learning systems, sc19
+* chen et al., binfi: an efficient fault injector for safety critical machine learning systems, sc19
   https://people.ece.ubc.ca/zitaoc/files/sc19-binfi.pdf
 
-- rakin et al., bit-flip attack: crushing neural network with progressive bit search, iccv 2019
+* rakin et al., bit flip attack: crushing neural network with progressive bit search, iccv 2019
   https://arxiv.org/abs/1903.12269
 
-- breier et al., the weight of a bit: emfi sensitivity analysis of embedded deep learning models, 2026
+* breier et al., the weight of a bit: emfi sensitivity analysis of embedded deep learning models, 2026
   https://arxiv.org/abs/2602.16309
 
-- ruospo et al., assessing convolutional neural networks reliability through statistical fault injections, date 2023
+* ruospo et al., assessing convolutional neural networks reliability through statistical fault injections, date 2023
   https://past.date-conference.com/proceedings-archive/2023/DATA/807.pdf
 
-- statistical fault injection: quantified error and confidence
+* statistical fault injection: quantified error and confidence
   https://hal.archives-ouvertes.fr/hal-00386107
 
-- sharif et al., efficient software-implemented hw fault tolerance for tinyml inference in safety-critical applications, date 2023
+* sharif et al., EFFICIENT software implemented hw fault tolerance for tinyml inference in safety critical applications, date 2023
   https://past.date-conference.com/proceedings-archive/2023/DATA/6005.pdf
 

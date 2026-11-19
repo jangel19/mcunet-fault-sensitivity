@@ -87,7 +87,8 @@ typedef struct {
     size_t in_bytes;               /* bytes per input image (176*176*3) */
 } fi_runner_t;
 
-/* Creates an interpreter on top of m->buf (single thread, reference kernels).
+/* Creates an interpreter on top of m->buf (one thread, default C resolver).
+ * No reference-kernel selection or explicit delegates are requested.
  * Must be called after fi_model_load; m must outlive the runner. */
 int  fi_runner_init(fi_runner_t *r, const fi_model_t *m);
 void fi_runner_free(fi_runner_t *r);

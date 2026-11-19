@@ -9,9 +9,9 @@ python -m pip install -r requirements.txt
 python -m pip check
 ```
 
-`requirements.txt` is the runtime package snapshot from the working
+`requirements.txt` is teh runtime package SNAPSHOT from the working
 venv, including tensorflow 2.21.0, tflite 2.18.0 (the flatbuffer schema), numpy
-2.4.6, torch 2.14.0 and torchvision 0.29.0. these are the observed versions,
+2.4.6, torch 2.14.0 and torchvision 0.29.0. these are the OBSERVED versions,
 not a claim that other platforms or python versions work. installation from
 the index into an empty temporary venv succeeded, `pip check` passed, and
 the unchanged c/python suite passed all 99 checks with that fresh environment.
@@ -35,7 +35,7 @@ python -c 'from mcunet.model_zoo import build_model; print("mcunet import ok")'
 
 the source root contains the `mcunet/` package. `PYTHONPATH` adds that root to
 the interpreter's import path; cloning a sibling repo by itself does not.
-this exact revision passed the import check in the working venv. full float,
+this exact revision passed the import check in the working Venv. full float,
 export and eager quantization runs were not repeated in this pass.
 
 `eval_int8_tflite.py`, `make_subset.py` and `c/ref_logits.py` do not need
